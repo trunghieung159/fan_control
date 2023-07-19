@@ -68,24 +68,96 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Core/Src/main.o
  .data          0x0000000000000000        0x0 ./Core/Src/main.o
  .bss           0x0000000000000000        0x0 ./Core/Src/main.o
+ .bss.power     0x0000000000000000        0x1 ./Core/Src/main.o
+ .data.wind_mode
+                0x0000000000000000        0x1 ./Core/Src/main.o
+ .bss.control_mode
+                0x0000000000000000        0x1 ./Core/Src/main.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
+ .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
  .group         0x0000000000000000        0xc ./Core/Src/message_handler.o
  .text          0x0000000000000000        0x0 ./Core/Src/message_handler.o
  .data          0x0000000000000000        0x0 ./Core/Src/message_handler.o
  .bss           0x0000000000000000        0x0 ./Core/Src/message_handler.o
- .bss.power     0x0000000000000000        0x1 ./Core/Src/message_handler.o
- .bss.wind_mode
-                0x0000000000000000        0x1 ./Core/Src/message_handler.o
- .bss.control_mode
-                0x0000000000000000        0x1 ./Core/Src/message_handler.o
- .debug_info    0x0000000000000000       0xd9 ./Core/Src/message_handler.o
- .debug_abbrev  0x0000000000000000       0x65 ./Core/Src/message_handler.o
+ .text.handle_message
+                0x0000000000000000       0x46 ./Core/Src/message_handler.o
+ .text.process_messange
+                0x0000000000000000      0x158 ./Core/Src/message_handler.o
+ .debug_info    0x0000000000000000      0x1db ./Core/Src/message_handler.o
+ .debug_abbrev  0x0000000000000000       0xd9 ./Core/Src/message_handler.o
  .debug_aranges
-                0x0000000000000000       0x18 ./Core/Src/message_handler.o
- .debug_macro   0x0000000000000000       0x1b ./Core/Src/message_handler.o
+                0x0000000000000000       0x28 ./Core/Src/message_handler.o
+ .debug_ranges  0x0000000000000000       0x18 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x1b6 ./Core/Src/message_handler.o
  .debug_macro   0x0000000000000000      0xa78 ./Core/Src/message_handler.o
- .debug_line    0x0000000000000000       0x53 ./Core/Src/message_handler.o
- .debug_str     0x0000000000000000     0x2d8d ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x1a1 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x2e ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x28 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x22 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x8e ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x51 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x103 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x6a ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x1df ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x1c ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x22 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0xfb ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000     0x1011 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x11f ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000    0x1a17a ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x6d ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000     0x38e6 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x174 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x5c ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000     0x159e ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x5a5 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x1b9 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x18b ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x26b ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x23d ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x241 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x37c ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0xd6 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x122 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x3ef ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x5ba ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000       0x44 ./Core/Src/message_handler.o
+ .debug_macro   0x0000000000000000      0x330 ./Core/Src/message_handler.o
+ .debug_line    0x0000000000000000      0x7f0 ./Core/Src/message_handler.o
+ .debug_str     0x0000000000000000    0xe0a6b ./Core/Src/message_handler.o
  .comment       0x0000000000000000       0x51 ./Core/Src/message_handler.o
+ .debug_frame   0x0000000000000000       0x5c ./Core/Src/message_handler.o
  .ARM.attributes
                 0x0000000000000000       0x34 ./Core/Src/message_handler.o
  .group         0x0000000000000000        0xc ./Core/Src/stm32l4xx_hal_msp.o
@@ -2726,37 +2798,37 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
 LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.200.202301161003/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
 LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.200.202301161003/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/libgcc.a
 
-.debug_info     0x0000000000000000     0xc22a
- .debug_info    0x0000000000000000      0xb8b ./Core/Src/main.o
- .debug_info    0x0000000000000b8b      0xfd1 ./Core/Src/stm32l4xx_hal_msp.o
- .debug_info    0x0000000000001b5c      0x751 ./Core/Src/stm32l4xx_it.o
- .debug_info    0x00000000000022ad      0x5c6 ./Core/Src/system_stm32l4xx.o
- .debug_info    0x0000000000002873       0x22 ./Core/Startup/startup_stm32l476vgtx.o
- .debug_info    0x0000000000002895      0xb35 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
- .debug_info    0x00000000000033ca      0xe21 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
- .debug_info    0x00000000000041eb      0x76a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o
- .debug_info    0x0000000000004955      0x821 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o
- .debug_info    0x0000000000005176      0x9f0 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
- .debug_info    0x0000000000005b66      0xced ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
- .debug_info    0x0000000000006853      0xe92 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o
- .debug_info    0x00000000000076e5     0x3d0e ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
- .debug_info    0x000000000000b3f3      0xe37 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.o
+.debug_info     0x0000000000000000     0xc2da
+ .debug_info    0x0000000000000000      0xc3b ./Core/Src/main.o
+ .debug_info    0x0000000000000c3b      0xfd1 ./Core/Src/stm32l4xx_hal_msp.o
+ .debug_info    0x0000000000001c0c      0x751 ./Core/Src/stm32l4xx_it.o
+ .debug_info    0x000000000000235d      0x5c6 ./Core/Src/system_stm32l4xx.o
+ .debug_info    0x0000000000002923       0x22 ./Core/Startup/startup_stm32l476vgtx.o
+ .debug_info    0x0000000000002945      0xb35 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
+ .debug_info    0x000000000000347a      0xe21 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
+ .debug_info    0x000000000000429b      0x76a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o
+ .debug_info    0x0000000000004a05      0x821 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o
+ .debug_info    0x0000000000005226      0x9f0 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
+ .debug_info    0x0000000000005c16      0xced ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
+ .debug_info    0x0000000000006903      0xe92 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o
+ .debug_info    0x0000000000007795     0x3d0e ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
+ .debug_info    0x000000000000b4a3      0xe37 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.o
 
-.debug_abbrev   0x0000000000000000     0x1bf7
- .debug_abbrev  0x0000000000000000      0x209 ./Core/Src/main.o
- .debug_abbrev  0x0000000000000209      0x1ce ./Core/Src/stm32l4xx_hal_msp.o
- .debug_abbrev  0x00000000000003d7      0x166 ./Core/Src/stm32l4xx_it.o
- .debug_abbrev  0x000000000000053d      0x116 ./Core/Src/system_stm32l4xx.o
- .debug_abbrev  0x0000000000000653       0x12 ./Core/Startup/startup_stm32l476vgtx.o
- .debug_abbrev  0x0000000000000665      0x23a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
- .debug_abbrev  0x000000000000089f      0x316 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
- .debug_abbrev  0x0000000000000bb5      0x1d7 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o
- .debug_abbrev  0x0000000000000d8c      0x1bb ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o
- .debug_abbrev  0x0000000000000f47      0x1f3 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
- .debug_abbrev  0x000000000000113a      0x2bd ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
- .debug_abbrev  0x00000000000013f7      0x299 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o
- .debug_abbrev  0x0000000000001690      0x2bc ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
- .debug_abbrev  0x000000000000194c      0x2ab ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.o
+.debug_abbrev   0x0000000000000000     0x1c00
+ .debug_abbrev  0x0000000000000000      0x212 ./Core/Src/main.o
+ .debug_abbrev  0x0000000000000212      0x1ce ./Core/Src/stm32l4xx_hal_msp.o
+ .debug_abbrev  0x00000000000003e0      0x166 ./Core/Src/stm32l4xx_it.o
+ .debug_abbrev  0x0000000000000546      0x116 ./Core/Src/system_stm32l4xx.o
+ .debug_abbrev  0x000000000000065c       0x12 ./Core/Startup/startup_stm32l476vgtx.o
+ .debug_abbrev  0x000000000000066e      0x23a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
+ .debug_abbrev  0x00000000000008a8      0x316 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
+ .debug_abbrev  0x0000000000000bbe      0x1d7 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o
+ .debug_abbrev  0x0000000000000d95      0x1bb ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o
+ .debug_abbrev  0x0000000000000f50      0x1f3 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
+ .debug_abbrev  0x0000000000001143      0x2bd ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
+ .debug_abbrev  0x0000000000001400      0x299 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o
+ .debug_abbrev  0x0000000000001699      0x2bc ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
+ .debug_abbrev  0x0000000000001955      0x2ab ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.o
 
 .debug_aranges  0x0000000000000000      0x998
  .debug_aranges
@@ -2869,34 +2941,34 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_line    0x0000000000007d1f     0x322d ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
  .debug_line    0x000000000000af4c      0xbf8 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.o
 
-.debug_str      0x0000000000000000    0xe3c45
- .debug_str     0x0000000000000000    0xe0e53 ./Core/Src/main.o
-                                      0xe1140 (size before relaxing)
- .debug_str     0x00000000000e0e53      0x7da ./Core/Src/stm32l4xx_hal_msp.o
+.debug_str      0x0000000000000000    0xe3c8a
+ .debug_str     0x0000000000000000    0xe0e98 ./Core/Src/main.o
+                                      0xe11a3 (size before relaxing)
+ .debug_str     0x00000000000e0e98      0x7da ./Core/Src/stm32l4xx_hal_msp.o
                                       0xe17d7 (size before relaxing)
- .debug_str     0x00000000000e162d       0xef ./Core/Src/stm32l4xx_it.o
+ .debug_str     0x00000000000e1672       0xef ./Core/Src/stm32l4xx_it.o
                                       0xe0ea9 (size before relaxing)
- .debug_str     0x00000000000e171c       0xf2 ./Core/Src/system_stm32l4xx.o
+ .debug_str     0x00000000000e1761       0xf2 ./Core/Src/system_stm32l4xx.o
                                       0xe0bc8 (size before relaxing)
- .debug_str     0x00000000000e180e       0x36 ./Core/Startup/startup_stm32l476vgtx.o
+ .debug_str     0x00000000000e1853       0x36 ./Core/Startup/startup_stm32l476vgtx.o
                                          0x7d (size before relaxing)
- .debug_str     0x00000000000e1844      0x64a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
+ .debug_str     0x00000000000e1889      0x64a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
                                       0xe175b (size before relaxing)
- .debug_str     0x00000000000e1e8e      0x31d ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
+ .debug_str     0x00000000000e1ed3      0x31d ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
                                       0xe140f (size before relaxing)
- .debug_str     0x00000000000e21ab      0x258 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o
+ .debug_str     0x00000000000e21f0      0x258 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o
                                       0xe0e32 (size before relaxing)
- .debug_str     0x00000000000e2403      0x15f ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o
+ .debug_str     0x00000000000e2448      0x15f ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o
                                       0xe0d41 (size before relaxing)
- .debug_str     0x00000000000e2562      0x4e3 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
+ .debug_str     0x00000000000e25a7      0x4e3 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
                                       0xe1123 (size before relaxing)
- .debug_str     0x00000000000e2a45      0x3ac ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
+ .debug_str     0x00000000000e2a8a      0x3ac ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
                                       0xe120e (size before relaxing)
- .debug_str     0x00000000000e2df1      0x3bf ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o
+ .debug_str     0x00000000000e2e36      0x3bf ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o
                                       0xe1387 (size before relaxing)
- .debug_str     0x00000000000e31b0      0x8af ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
+ .debug_str     0x00000000000e31f5      0x8af ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
                                       0xe18f8 (size before relaxing)
- .debug_str     0x00000000000e3a5f      0x1e6 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.o
+ .debug_str     0x00000000000e3aa4      0x1e6 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.o
                                       0xe110a (size before relaxing)
 
 .comment        0x0000000000000000       0x50

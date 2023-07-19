@@ -1,0 +1,2 @@
+../Core/Src/message_handler.c:13:9:handle_message	24	static
+../Core/Src/message_handler.c:38:9:process_messange	24	static
