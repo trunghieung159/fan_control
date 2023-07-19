@@ -6,7 +6,6 @@
  */
 
 #include "message_handler.h"
-POWER power = ON;
-WIND_MODE wind_mode = LEVEL_1;
-CONTROL_MODE control_mode = AUTOMATIC;
-
+extern POWER power;
+extern WIND_MODE wind_mode;
+extern CONTROL_MODE control_mode;

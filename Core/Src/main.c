@@ -43,6 +43,9 @@
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
+POWER power = ON;
+WIND_MODE wind_mode = LEVEL_1;
+CONTROL_MODE control_mode = AUTOMATIC;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
