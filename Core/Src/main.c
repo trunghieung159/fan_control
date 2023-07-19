@@ -21,14 +21,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include"message_handler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-typedef enum{ON, OFF} POWER;
-typedef enum{LEVEL_1, LEVEL_2, LEVEL3} WIND_MODE;
-typedef enum{AUTOMATIC, MANUAL} CONTROL_MODE;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -45,9 +43,6 @@ typedef enum{AUTOMATIC, MANUAL} CONTROL_MODE;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-POWER power = OFF;
-WIND_MODE win_mode = LEVEL_1;
-CONTROL_MODE control_mode = AUTOMATIC;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
