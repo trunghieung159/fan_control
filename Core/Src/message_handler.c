@@ -100,11 +100,11 @@ uint8_t process_message(char* rec_mes_buffer, char* rep_mes_buffer){
 					wind_mode = LEVEL_0;
 				}
 				else if(*(rec_mes_buffer + 3) == 0x01){
-					*(rep_mes_buffer + 3) = 0x01;
+					*(rep_mes_buffer + 3) = 0x00;
 					wind_mode = LEVEL_1;
 				}
 				else if(*(rec_mes_buffer + 3) == 0x02){
-					*(rep_mes_buffer + 3) = 0x02;
+					*(rep_mes_buffer + 3) = 0x00;
 					wind_mode = LEVEL_2;
 				}
 				else{
