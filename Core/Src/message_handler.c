@@ -13,55 +13,67 @@ extern CONTROL_MODE control_mode;
 uint8_t handle_message(char* rec_mes_buffer, char* rep_mes_buffer){
 	/*
 	 * handle message
-	 * return 0 if there is an error
-	 * return 1 otherwise
+	 * return 0 if don't send the reply
+	 * return the length of reply message buff otherwise
 	 */
-
+	uint8_t* ETX;
 	if(*rec_mes_buffer != 0x02){
 			return 0;
 		}
-	uint8_t expected_length = process_messange(rec_mes_buffer, rep_mes_buffer);
-	if(expected_length == -1){
-		return 0;
+	uint8_t rep_mes_data_length = process_message(rec_mes_buffer, rep_mes_buffer);
+	if(rep_mes_data_length == 1){
+		ETX = rec_mes_buffer + 4;
 	}
-	if (*(rec_mes_buffer + expected_length + 2) != 0x03){
-		*(rep_mes_buffer + 3) = 0xFF;
-		return 0;
+	else if(rep_mes_data_length == 5){
+		ETX = rec_mes_buffer + 8;
 	}
 	else{
-		return 1;
+		return 0;
 	}
+	if(*ETX != 0x03){
+		return 0;
+	}
+	return rep_mes_data_length+3;
 }
 
 
 
-uint8_t process_messange(char* rec_mes_buffer, char* rep_mes_buffer){
+uint8_t process_message(char* rec_mes_buffer, char* rep_mes_buffer){
 	/*
 	 * read command from receive buffer and write reply to rep buffer
+	 * return 0 if don't reply
+	 * return message data length otherwise
 	 *
 	*/
 
-	uint8_t* frame_type = rec_mes_buffer + 1;
-	uint8_t expected_length;
+	uint8_t* frame_type = (uint8_t*)rec_mes_buffer + 1;
+	uint8_t rec_data_length;
+	uint8_t rep_mes_data_length;
+	if(*frame_type == 0x04){
+		rep_mes_data_length = 5;
+	}
+	else{
+		rep_mes_data_length = 1;
+	}
 	switch (*frame_type){
 		case 0x01:
-			expected_length = 1;
+			rec_data_length = 1;
 			if (*(rec_mes_buffer + 3) == 0x00){
-				*rep_mes_buffer = 0x00;
+				*(rep_mes_buffer+3) = 0x00;
 				power = OFF;
 			}
-			else if(*(rec_mes_buffer + 2) == 0x01){
-				*rep_mes_buffer = 0x00;
+			else if(*(rec_mes_buffer + 3) == 0x01){
+				*(rep_mes_buffer+3) = 0x00;
 				power = ON;
 			}
 			else{
-				*rep_mes_buffer = 0xFF;
+				*(rep_mes_buffer+3) = 0xFF;
 			}
 			break;
 		case 0x02:
-			expected_length = 1;
+			rec_data_length = 1;
 			if(power == OFF){
-				*(rec_mes_buffer + 3) = 0x02;
+				*(rep_mes_buffer + 3) = 0x02;
 			}
 			else{
 				if(*(rec_mes_buffer + 3) == 0x00){
@@ -78,7 +90,7 @@ uint8_t process_messange(char* rec_mes_buffer, char* rep_mes_buffer){
 			}
 			break;
 		case 0x03:
-			expected_length = 1;
+			rec_data_length = 1;
 			if(power == OFF){
 				*(rep_mes_buffer + 3) = 0x02;
 			}
@@ -101,13 +113,21 @@ uint8_t process_messange(char* rec_mes_buffer, char* rep_mes_buffer){
 			}
 			break;
 		case 0x04:
-			expected_length = 0;
-			// TO DO
+			rec_data_length = 0;
+			*(rep_mes_buffer + 3) = 0x00;
+			*(rep_mes_buffer + 4) = power;
+			*(rep_mes_buffer + 5) = control_mode;
+			*(rep_mes_buffer + 6) = wind_mode;
+			// read temperature sensor
+			// *(rep_mes_buffer + 7)
 			break;
 		default:
-			return -1;
+			return 0;
 	}
-	return expected_length;
+	if(*(rec_mes_buffer+2) != rec_data_length){
+		*(rep_mes_buffer+3) = 0xFF;
+	}
+	return rep_mes_data_length;
 
 }
 
