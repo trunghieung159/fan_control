@@ -43,7 +43,7 @@
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-POWER power = ON;
+POWER power = OFF;
 WIND_MODE wind_mode = LEVEL_1;
 CONTROL_MODE control_mode = AUTOMATIC;
 /* USER CODE END PV */
@@ -90,7 +90,8 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  char receiveBuffer[6];
+  char sendBuffer[10];
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -98,7 +99,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  handle_message(receiveBuffer, sendBuffer);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
