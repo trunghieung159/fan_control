@@ -33,7 +33,7 @@ uint8_t handle_message(char* rec_mes_buffer, char* rep_mes_buffer){
 	if(*ETX != 0x03){
 		return 0;
 	}
-	return rep_mes_data_length+3;
+	return rep_mes_data_length+4;
 }
 
 
@@ -78,6 +78,7 @@ uint8_t process_message(char* rec_mes_buffer, char* rep_mes_buffer){
 			else{
 				if(*(rec_mes_buffer + 3) == 0x00){
 					*(rep_mes_buffer + 3) = 0x00;
+					// TO DO
 					control_mode = AUTOMATIC;
 				}
 				else if(*(rec_mes_buffer + 3) == 0x01){
@@ -122,7 +123,7 @@ uint8_t process_message(char* rec_mes_buffer, char* rep_mes_buffer){
 			*(rep_mes_buffer + 5) = control_mode;
 			*(rep_mes_buffer + 6) = wind_mode;
 			// read temperature sensor
-			// *(rep_mes_buffer + 7)
+			*(rep_mes_buffer + 7) = 0x00; 
 			break;
 		default:
 			return 0;

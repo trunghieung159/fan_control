@@ -18,10 +18,11 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include <stdio.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include"message_handler.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,6 +53,7 @@ CONTROL_MODE control_mode = AUTOMATIC;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
+extern void initialise_monitor_handles(void);
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
 
@@ -64,10 +66,13 @@ static void MX_USART1_UART_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
+
+char receiveBuffer[6];
+char sendBuffer[10];
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	initialise_monitor_handles();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -90,18 +95,40 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  char receiveBuffer[6];
-  char sendBuffer[10];
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-	  handle_message(receiveBuffer, sendBuffer);
-    /* USER CODE BEGIN 3 */
-  }
+
+  /* USER CODE END WHILE */
+  
+  /* USER CODE BEGIN 3 */
+  printf("hello world\n");
+  turn(1);
+  handle_message(receiveBuffer, sendBuffer);
+  ctrl_mode(1);
+  handle_message(receiveBuffer, sendBuffer);
+  set_wind(2);
+  handle_message(receiveBuffer, sendBuffer);
+  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
+
+  turn(0);
+  handle_message(receiveBuffer, sendBuffer);
+  ctrl_mode(0);
+  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
+
+  turn(1);
+  handle_message(receiveBuffer, sendBuffer);
+  ctrl_mode(0);
+  handle_message(receiveBuffer, sendBuffer);
+  set_wind(1);
+  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
+
+  ctrl_mode(1);
+  handle_message(receiveBuffer, sendBuffer);
+  set_wind(0);
+  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
   /* USER CODE END 3 */
 }
 
@@ -202,6 +229,54 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void turn(uint8_t pow){
+	receiveBuffer[0] = 0x02;
+	receiveBuffer[1] = 0x01;
+	receiveBuffer[2] = 0x01;
+	if(pow == 0){
+		receiveBuffer[3] = 0x00;
+	}
+	else{
+		receiveBuffer[3] = 0x01;
+	}
+	receiveBuffer[4] = 0x03;
+}
+
+void ctrl_mode(uint8_t ctrl_mode){
+	receiveBuffer[0] = 0x02;
+	receiveBuffer[1] = 0x02;
+	receiveBuffer[2] = 0x01;
+	if(ctrl_mode == 0){
+		receiveBuffer[3] = 0x00;
+	}
+	else{
+		receiveBuffer[3] = 0x01;
+	}
+	receiveBuffer[4] = 0x03;
+}
+
+void set_wind(uint8_t wind_mode){
+	receiveBuffer[0] = 0x02;
+	receiveBuffer[1] = 0x03;
+	receiveBuffer[2] = 0x01;
+	receiveBuffer[3] = wind_mode;
+	receiveBuffer[4] = 0x03;
+}
+
+void request(){
+	receiveBuffer[0] = 0x02;
+	receiveBuffer[1] = 0x04;
+	receiveBuffer[2] = 0x00;
+	receiveBuffer[3] = 0x03;
+}
+
+void print_mess(char rep_mess_buff[], uint8_t length){
+  for (uint8_t i =0; i<length; i++ ){
+    printf("%c", rep_mess_buff+i);
+  }
+  printf("\n");
+}
+
 
 /* USER CODE END 4 */
 

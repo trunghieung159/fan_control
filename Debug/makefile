@@ -61,7 +61,7 @@ main-build: fan_control.elf secondary-outputs
 
 # Tool invocations
 fan_control.elf fan_control.map: $(OBJS) $(USER_OBJS) /Users/nguyentrunghieu/STM32CubeIDE/workspace/target/fan_control/STM32L476VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "fan_control.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/nguyentrunghieu/STM32CubeIDE/workspace/target/fan_control/STM32L476VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="fan_control.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "fan_control.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/nguyentrunghieu/STM32CubeIDE/workspace/target/fan_control/STM32L476VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="fan_control.map" -Wl,--gc-sections -static -specs=rdimon.specs -lc -lrdimon --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
