@@ -1,2 +1,6 @@
-../Core/Src/message_handler.c:13:9:handle_message	24	static
-../Core/Src/message_handler.c:41:9:process_message	24	static
+../Core/Src/message_handler.c:13:9:handle_message	48	static
+../Core/Src/message_handler.c:77:6:process_power_message	24	static
+../Core/Src/message_handler.c:104:6:process_control_mode_message	24	static
+../Core/Src/message_handler.c:126:6:process_wind_mode_message	24	static
+../Core/Src/message_handler.c:148:9:process_states_request_message	24	static
+../Core/Src/message_handler.c:168:9:check_message_data_length	24	static

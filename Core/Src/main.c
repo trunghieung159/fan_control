@@ -67,8 +67,8 @@ extern void initialise_monitor_handles(void);
   * @retval int
   */
 
-char receiveBuffer[6];
-char sendBuffer[10];
+unsigned char receiveBuffer[6];
+unsigned char sendBuffer[10];
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -104,7 +104,8 @@ int main(void)
   /* USER CODE END WHILE */
   
   /* USER CODE BEGIN 3 */
-  printf("hello world\n");
+  uint a = 3;
+  printf("%x\n", a);
   turn(1);
   handle_message(receiveBuffer, sendBuffer);
   ctrl_mode(1);
@@ -270,9 +271,9 @@ void request(){
 	receiveBuffer[3] = 0x03;
 }
 
-void print_mess(char rep_mess_buff[], uint8_t length){
+void print_mess(unsigned char rep_mess_buff[], uint8_t length){
   for (uint8_t i =0; i<length; i++ ){
-    printf("%c", rep_mess_buff+i);
+    printf("%x", *(rep_mess_buff+i));
   }
   printf("\n");
 }

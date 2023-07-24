@@ -10,129 +10,173 @@ extern POWER power;
 extern WIND_MODE wind_mode;
 extern CONTROL_MODE control_mode;
 
-uint8_t handle_message(char* rec_mes_buffer, char* rep_mes_buffer){
-	/*
-	 * handle message
-	 * return 0 if don't send the reply
+uint8_t handle_message(unsigned char* received_buf, unsigned char* sent_buf){
+	/**
+	 * @brief read received message in read buffer and write reply in write buffer
+	 * @param read_buf incoming message's buffer
+	 * @param write_buf sending message's buffer
+	 * @return 0 if don't send the reply
 	 * return the length of reply message buff otherwise
 	 */
-	uint8_t* ETX;
-	if(*rec_mes_buffer != 0x02){
-			return 0;
-		}
-	uint8_t rep_mes_data_length = process_message(rec_mes_buffer, rep_mes_buffer);
-	if(rep_mes_data_length == 1){
-		ETX = rec_mes_buffer + 4;
+	uint8_t sent_buf_length;
+	uint8_t* stx = received_buf;
+	if(*stx != 0x02){
+		sent_buf_length = 0;
+		goto terminate;
 	}
-	else if(rep_mes_data_length == 5){
-		ETX = rec_mes_buffer + 8;
+
+	uint8_t* received_frame_type  = received_buf + 1;
+	uint8_t* sent_frame_type = sent_buf + 1;
+	uint8_t* p_sent_data_length = sent_buf + 2;
+	uint8_t sent_data_length;
+	uint8_t received_data_length;
+	
+	*sent_buf = 0x02;
+	switch(*received_frame_type){
+		case 0x01:
+			process_power_message(received_buf, sent_buf);
+			sent_data_length = 1;
+			received_data_length = 1;
+			break;
+		case 0x02:
+			process_control_mode_message(received_buf, sent_buf);
+			sent_data_length = 1;
+			received_data_length = 1;
+			break;
+		case 0x03:
+			process_wind_mode_message(received_buf, sent_buf);
+			sent_data_length = 1;
+			received_data_length = 1;
+			break;
+		case 0x04:
+			sent_data_length = process_states_request_message(received_buf, sent_buf);
+			received_data_length = 0; 
+			break;
+		default:
+			sent_buf_length = 0;
+			goto terminate;
 	}
-	else{
-		return 0;
+	*sent_frame_type = *received_frame_type + 0x80;
+	*p_sent_data_length = sent_data_length;
+
+	uint8_t* received_ETX = received_buf + 3 + received_data_length;
+	if(*received_ETX != 0x03){
+		sent_buf_length = 0;
+		goto terminate;
 	}
-	if(*ETX != 0x03){
-		return 0;
-	}
-	return rep_mes_data_length+4;
+
+
+	uint8_t* sent_ETX = sent_buf + 3 + sent_data_length; 
+	*sent_ETX = 0x03;
+	sent_buf_length = sent_data_length + 4;
+	terminate: return sent_buf_length;
 }
 
 
 
-uint8_t process_message(char* rec_mes_buffer, char* rep_mes_buffer){
-	/*
-	 * read command from receive buffer and write reply to rep buffer
-	 * return 0 if don't reply
+void process_power_message(unsigned char* received_buf, unsigned char* sent_buf){
+	/**
+	 * @brief read power message from received_buf and replies in sent_buf 
+	 * @param received_buf power message's buffer
+	 * @param sent_buf reply message's buffer 
 	 * return message data length otherwise
 	 *
 	*/
+	if(!check_message_data_length(received_buf, 1)){
+		return;
+	}
 
-	uint8_t* frame_type = (uint8_t*)rec_mes_buffer + 1;
-	uint8_t rec_data_length;
-	uint8_t rep_mes_data_length;
-	if(*frame_type == 0x04){
-		rep_mes_data_length = 5;
+	uint8_t* received_data = received_buf + 3;
+	uint8_t* sent_data = sent_buf + 3;
+	if(*received_data == 0x00){
+		power = OFF;
+		*sent_data = 0x00;
+	}
+	else if(*received_data == 0x01){
+		power = ON;
+		*sent_data = 0x00;
 	}
 	else{
-		rep_mes_data_length = 1;
+		*sent_data = 0xFF;
 	}
-	switch (*frame_type){
-		case 0x01:
-			rec_data_length = 1;
-			if (*(rec_mes_buffer + 3) == 0x00){
-				*(rep_mes_buffer+3) = 0x00;
-				power = OFF;
-			}
-			else if(*(rec_mes_buffer + 3) == 0x01){
-				*(rep_mes_buffer+3) = 0x00;
-				power = ON;
-			}
-			else{
-				*(rep_mes_buffer+3) = 0xFF;
-			}
-			break;
-		case 0x02:
-			rec_data_length = 1;
-			if(power == OFF){
-				*(rep_mes_buffer + 3) = 0x02;
-			}
-			else{
-				if(*(rec_mes_buffer + 3) == 0x00){
-					*(rep_mes_buffer + 3) = 0x00;
-					// TO DO
-					control_mode = AUTOMATIC;
-				}
-				else if(*(rec_mes_buffer + 3) == 0x01){
-					*(rep_mes_buffer + 3) = 0x00;
-					control_mode = MANUAL;
-				}
-				else{
-					*(rep_mes_buffer + 3) = 0x01;
-				}
-			}
-			break;
-		case 0x03:
-			rec_data_length = 1;
-			if(power == OFF){
-				*(rep_mes_buffer + 3) = 0x02;
-			}
-			else{
-				if(*(rec_mes_buffer + 3) == 0x00){
-					*(rep_mes_buffer + 3) = 0x00;
-					wind_mode = LEVEL_0;
-					control_mode = MANUAL;
-				}
-				else if(*(rec_mes_buffer + 3) == 0x01){
-					*(rep_mes_buffer + 3) = 0x00;
-					wind_mode = LEVEL_1;
-					control_mode = MANUAL;
-				}
-				else if(*(rec_mes_buffer + 3) == 0x02){
-					*(rep_mes_buffer + 3) = 0x00;
-					wind_mode = LEVEL_2;
-					control_mode = MANUAL;
-				}
-				else{
-					*(rep_mes_buffer + 3) = 0x01;
-				}
-			}
-			break;
-		case 0x04:
-			rec_data_length = 0;
-			*(rep_mes_buffer + 3) = 0x00;
-			*(rep_mes_buffer + 4) = power;
-			*(rep_mes_buffer + 5) = control_mode;
-			*(rep_mes_buffer + 6) = wind_mode;
-			// read temperature sensor
-			*(rep_mes_buffer + 7) = 0x00; 
-			break;
-		default:
-			return 0;
-	}
-	if(*(rec_mes_buffer+2) != rec_data_length){
-		*(rep_mes_buffer+3) = 0xFF;
-	}
-	return rep_mes_data_length;
-
 }
 
+void process_control_mode_message(unsigned char* received_buf, unsigned char* sent_buf){
+	/**
+	 * @brief read mode control message from received_buf and replies in sent_buf 
+	 * @param received_buf mode control message's buffer
+	 * @param sent_buf reply message's buffer 
+	 *
+	*/
+	if(!check_message_data_length(received_buf, 1)){
+		return;
+	}
+
+	uint8_t* received_data = received_buf + 3;
+	uint8_t* sent_data = sent_buf + 3;
+	if(*received_data == AUTOMATIC || *received_data == MANUAL){
+		control_mode = *received_data;
+		*sent_data = 0x00;
+	}
+	else{
+		*sent_data = 0xFF;
+	}
+}
+
+void process_wind_mode_message(unsigned char* received_buf, unsigned char* sent_buf){
+	/**
+	 * @brief read win mode message from received_buf and replies in sent_buf 
+	 * @param received_buf win mode message's buffer
+	 * @param sent_buf reply message's buffer 
+	 *
+	*/
+	if(!check_message_data_length(received_buf, 1)){
+		return;
+	}
+
+	uint8_t* received_data = received_buf + 3;
+	uint8_t* sent_data = sent_buf + 3;
+	if(*received_data == LEVEL_0 || *received_data == LEVEL_1 || *received_data == LEVEL_2){
+		wind_mode = *received_data;
+		*sent_data = 0x00;
+	}
+	else{
+		*sent_data = 0xFF;
+	}
+}
+
+uint8_t process_states_request_message(unsigned char* received_buf, unsigned char* sent_buf){
+	/**
+	 * @brief read states request message from received_buf and replies in sent_buf 
+	 * @param received_buf sates request message's buffer
+	 * @param sent_buf reply message's buffer 
+	 * @return sent message's data length
+	*/
+	uint8_t* sent_data = sent_buf + 3;
+	uint8_t sent_data_length;
+	if(!check_message_data_length(received_buf, 0)){
+		sent_data_length = 1;
+		*sent_data = 0x00;
+	}
+	else{
+		sent_data_length = 5;
+		*sent_data = 0xFF;
+	}
+	return sent_data_length;
+}
+
+uint8_t check_message_data_length(unsigned char* received_buf, uint8_t expected_value){
+	/**
+	* @brief check whether the length message is correct or not 
+	* @return 1 if it is correct 
+	* return  0 other wise  
+	*/
+	uint8_t* length = received_buf + 2;
+	if(*length == expected_value){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}
 
