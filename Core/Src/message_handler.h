@@ -8,6 +8,7 @@
 #define SRC_MESSAGE_HANDLER_H_
 #include "stm32l4xx_hal.h"
 
+
 typedef enum{
 	OFF = 0,
 	ON = 1
@@ -23,7 +24,10 @@ typedef enum{
 	AUTOMATIC = 0,
 	MANUAL = 1
 } CONTROL_MODE;
-	
+
+extern POWER power;
+extern WIND_MODE wind_mode;
+extern CONTROL_MODE control_mode;
 
 uint8_t handle_message(unsigned char* received_buf, unsigned char* sent_buf);
 void process_power_message(unsigned char* received_buf, unsigned char* sent_buf);

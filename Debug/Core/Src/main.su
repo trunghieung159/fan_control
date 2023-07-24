@@ -1,10 +1,5 @@
-../Core/Src/main.c:72:5:main	16	static
-../Core/Src/main.c:140:6:SystemClock_Config	96	static
-../Core/Src/main.c:185:13:MX_USART1_UART_Init	8	static
-../Core/Src/main.c:220:13:MX_GPIO_Init	16	static
-../Core/Src/main.c:233:6:turn	16	static
-../Core/Src/main.c:246:6:ctrl_mode	16	static
-../Core/Src/main.c:259:6:set_wind	16	static
-../Core/Src/main.c:267:6:request	4	static
-../Core/Src/main.c:274:6:print_mess	24	static
-../Core/Src/main.c:288:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/main.c:75:5:main	8	static
+../Core/Src/main.c:136:6:SystemClock_Config	96	static
+../Core/Src/main.c:181:13:MX_USART1_UART_Init	8	static
+../Core/Src/main.c:216:13:MX_GPIO_Init	16	static
+../Core/Src/main.c:238:6:Error_Handler	4	static,ignoring_inline_asm

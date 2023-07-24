@@ -1,0 +1,6 @@
+../Core/Src/test_message_handler.c:9:6:turn	16	static
+../Core/Src/test_message_handler.c:25:6:ctrl_mode	16	static
+../Core/Src/test_message_handler.c:41:6:set_wind	16	static
+../Core/Src/test_message_handler.c:52:6:request	16	static
+../Core/Src/test_message_handler.c:62:6:print_mess	24	static
+../Core/Src/test_message_handler.c:73:6:test_message_handler	16	static

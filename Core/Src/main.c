@@ -22,7 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include"message_handler.h"
-
+#include"test_message_handler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,6 +44,10 @@
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
+
+unsigned char receiveBuffer[5];
+unsigned char sendBuffer[9];
+
 POWER power = OFF;
 WIND_MODE wind_mode = LEVEL_1;
 CONTROL_MODE control_mode = AUTOMATIC;
@@ -67,8 +71,7 @@ extern void initialise_monitor_handles(void);
   * @retval int
   */
 
-unsigned char receiveBuffer[6];
-unsigned char sendBuffer[10];
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -104,32 +107,25 @@ int main(void)
   /* USER CODE END WHILE */
   
   /* USER CODE BEGIN 3 */
-  uint a = 3;
-  printf("%x\n", a);
-  turn(1);
-  handle_message(receiveBuffer, sendBuffer);
-  ctrl_mode(1);
-  handle_message(receiveBuffer, sendBuffer);
-  set_wind(2);
-  handle_message(receiveBuffer, sendBuffer);
-  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
 
-  turn(0);
-  handle_message(receiveBuffer, sendBuffer);
-  ctrl_mode(0);
-  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
+  test_message_handler(receiveBuffer, sendBuffer);
 
-  turn(1);
-  handle_message(receiveBuffer, sendBuffer);
-  ctrl_mode(0);
-  handle_message(receiveBuffer, sendBuffer);
-  set_wind(1);
-  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
-
-  ctrl_mode(1);
-  handle_message(receiveBuffer, sendBuffer);
-  set_wind(0);
-  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
+//  turn(0);
+//  handle_message(receiveBuffer, sendBuffer);
+//  ctrl_mode(0);
+//  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
+//
+//  turn(1);
+//  handle_message(receiveBuffer, sendBuffer);
+//  ctrl_mode(0);
+//  handle_message(receiveBuffer, sendBuffer);
+//  set_wind(1);
+//  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
+//
+//  ctrl_mode(1);
+//  handle_message(receiveBuffer, sendBuffer);
+//  set_wind(0);
+//  print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
   /* USER CODE END 3 */
 }
 
@@ -230,53 +226,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void turn(uint8_t pow){
-	receiveBuffer[0] = 0x02;
-	receiveBuffer[1] = 0x01;
-	receiveBuffer[2] = 0x01;
-	if(pow == 0){
-		receiveBuffer[3] = 0x00;
-	}
-	else{
-		receiveBuffer[3] = 0x01;
-	}
-	receiveBuffer[4] = 0x03;
-}
 
-void ctrl_mode(uint8_t ctrl_mode){
-	receiveBuffer[0] = 0x02;
-	receiveBuffer[1] = 0x02;
-	receiveBuffer[2] = 0x01;
-	if(ctrl_mode == 0){
-		receiveBuffer[3] = 0x00;
-	}
-	else{
-		receiveBuffer[3] = 0x01;
-	}
-	receiveBuffer[4] = 0x03;
-}
-
-void set_wind(uint8_t wind_mode){
-	receiveBuffer[0] = 0x02;
-	receiveBuffer[1] = 0x03;
-	receiveBuffer[2] = 0x01;
-	receiveBuffer[3] = wind_mode;
-	receiveBuffer[4] = 0x03;
-}
-
-void request(){
-	receiveBuffer[0] = 0x02;
-	receiveBuffer[1] = 0x04;
-	receiveBuffer[2] = 0x00;
-	receiveBuffer[3] = 0x03;
-}
-
-void print_mess(unsigned char rep_mess_buff[], uint8_t length){
-  for (uint8_t i =0; i<length; i++ ){
-    printf("%x", *(rep_mess_buff+i));
-  }
-  printf("\n");
-}
 
 
 /* USER CODE END 4 */

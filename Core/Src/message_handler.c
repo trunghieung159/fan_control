@@ -6,9 +6,7 @@
  */
 
 #include "message_handler.h"
-extern POWER power;
-extern WIND_MODE wind_mode;
-extern CONTROL_MODE control_mode;
+
 
 uint8_t handle_message(unsigned char* received_buf, unsigned char* sent_buf){
 	/**
