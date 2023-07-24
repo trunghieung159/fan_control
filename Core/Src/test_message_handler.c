@@ -63,9 +63,9 @@ void print_mess(unsigned char* rep_mess_buff, uint8_t length){
 	/**
 	 * @brief print value of message's buffer
 	*/
-  printf("Actual: ");
+  printf("Actual:   ");
   for (uint8_t i =0; i<length; i++ ){
-    printf("%x", *(rep_mess_buff+i));
+    printf("%X ", *(rep_mess_buff+i));
   }
   printf("\n");
 }
@@ -78,25 +78,39 @@ void test_message_handler(unsigned char* receiveBuffer, unsigned char* sendBuffe
 
 	// Test case 1:
 	turn(receiveBuffer, 1);
-	handle_message(receiveBuffer, sendBuffer);
-	ctrl_mode(receiveBuffer ,1);
-	handle_message(receiveBuffer, sendBuffer);
-	set_wind(receiveBuffer, 2);
-	handle_message(receiveBuffer, sendBuffer);
-	printf("Expected: 2 83 1 0 3\n");
+	printf("Expected: 2 81 1 0 3\n");
 	print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
-
-
 
 	// Test case 2:
-	turn(receiveBuffer, 1);
-	handle_message(receiveBuffer, sendBuffer);
-	ctrl_mode(receiveBuffer ,0);
-	handle_message(receiveBuffer, sendBuffer);
-	set_wind(receiveBuffer, 1);
+	ctrl_mode(receiveBuffer ,1);
+	printf("Expected: 2 82 1 0 3\n");
+	print_mess(sendBuffer ,handle_message(receiveBuffer, sendBuffer));
+
+	// Test case 4:
+	set_wind(receiveBuffer, 2);
 	printf("Expected: 2 83 1 0 3\n");
+	print_mess(sendBuffer ,handle_message(receiveBuffer, sendBuffer));
+
+	// Test case 5:
+	request(receiveBuffer);
+	printf("Expected: 2 84 5 0 1 1 2 0 3\n");
+	print_mess(sendBuffer ,handle_message(receiveBuffer, sendBuffer));
+
+	// Test case 6:
+	turn(receiveBuffer, 0);
+	handle_message(receiveBuffer, sendBuffer);
+	ctrl_mode(receiveBuffer, 0);
+	printf("Expected: 2 82 1 FF 3\n");
+	print_mess(sendBuffer ,handle_message(receiveBuffer, sendBuffer));
+
+	// Test case 7:
+	set_wind(receiveBuffer, 1);
+	printf("Expected: 2 83 1 FF 3\n");
+	print_mess(sendBuffer ,handle_message(receiveBuffer, sendBuffer));
+
+	// Test case 8:
+	request(receiveBuffer);
+	printf("Expected: 2 84 5 0 0 1 2 0 3\n");
 	print_mess(sendBuffer, handle_message(receiveBuffer, sendBuffer));
-
-
 
 }

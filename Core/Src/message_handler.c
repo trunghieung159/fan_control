@@ -112,13 +112,22 @@ void process_control_mode_message(unsigned char* received_buf, unsigned char* se
 
 	uint8_t* received_data = received_buf + 3;
 	uint8_t* sent_data = sent_buf + 3;
+	if(power == OFF){
+		*sent_data = 0xFF;
+		goto terminate;
+	}
 	if(*received_data == AUTOMATIC || *received_data == MANUAL){
 		control_mode = *received_data;
 		*sent_data = 0x00;
+		if(control_mode == AUTOMATIC){
+			//Read temperature
+			// Add logic
+		}
 	}
 	else{
 		*sent_data = 0xFF;
 	}
+	terminate: return;
 }
 
 void process_wind_mode_message(unsigned char* received_buf, unsigned char* sent_buf){
@@ -134,13 +143,20 @@ void process_wind_mode_message(unsigned char* received_buf, unsigned char* sent_
 
 	uint8_t* received_data = received_buf + 3;
 	uint8_t* sent_data = sent_buf + 3;
+	if(power == OFF){
+		*sent_data = 0xFF;
+		goto terminate;
+	}
+
 	if(*received_data == LEVEL_0 || *received_data == LEVEL_1 || *received_data == LEVEL_2){
 		wind_mode = *received_data;
 		*sent_data = 0x00;
+		control_mode = MANUAL;
 	}
 	else{
 		*sent_data = 0xFF;
 	}
+	terminate: return;
 }
 
 uint8_t process_states_request_message(unsigned char* received_buf, unsigned char* sent_buf){
@@ -151,14 +167,24 @@ uint8_t process_states_request_message(unsigned char* received_buf, unsigned cha
 	 * @return sent message's data length
 	*/
 	uint8_t* sent_data = sent_buf + 3;
+	uint8_t* power_state = sent_data + 1;
+	uint8_t* control_mode_state = sent_data + 2;
+	uint8_t* wind_mode_state = sent_data + 3;	
+	uint8_t* temperature_state = sent_data + 4;
 	uint8_t sent_data_length;
 	if(!check_message_data_length(received_buf, 0)){
 		sent_data_length = 1;
-		*sent_data = 0x00;
+		*sent_data = 0xFF;
 	}
 	else{
+		*sent_data = 0x00;
+		*power_state = power;
+		*control_mode_state = control_mode;
+		*wind_mode_state = wind_mode;
+		// read temperature 
+		// modify this 
+		*temperature_state = 0x00;
 		sent_data_length = 5;
-		*sent_data = 0xFF;
 	}
 	return sent_data_length;
 }
