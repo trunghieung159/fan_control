@@ -23,7 +23,7 @@ typedef enum{
 typedef enum{
 	AUTOMATIC = 0,
 	MANUAL = 1
-} CONTROL_MODE;
+}  CONTROL_MODE;
 
 extern POWER power;
 extern WIND_MODE wind_mode;

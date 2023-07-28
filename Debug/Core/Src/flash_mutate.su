@@ -1,0 +1,6 @@
+../Core/Src/flash_mutate.c:19:6:mutate_power	24	static
+../Core/Src/flash_mutate.c:32:6:mutate_control_mode	24	static
+../Core/Src/flash_mutate.c:43:6:mutate_wind_mode	24	static
+../Core/Src/flash_mutate.c:53:9:get_power	8	static
+../Core/Src/flash_mutate.c:59:9:get_control_mode	8	static
+../Core/Src/flash_mutate.c:65:9:get_wind_mode	8	static

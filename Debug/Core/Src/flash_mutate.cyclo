@@ -1,0 +1,6 @@
+flash_mutate.c:19:6:mutate_power	3
+flash_mutate.c:32:6:mutate_control_mode	2
+flash_mutate.c:43:6:mutate_wind_mode	2
+flash_mutate.c:53:9:get_power	1
+flash_mutate.c:59:9:get_control_mode	1
+flash_mutate.c:65:9:get_wind_mode	1

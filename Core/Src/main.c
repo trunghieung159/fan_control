@@ -18,11 +18,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stdio.h>
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include"message_handler.h"
 #include"test_message_handler.h"
+#include"flash_mutate.h"
+#include"test_flash_mutate.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,22 +44,30 @@
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart1;
-
+FLASH_EraseInitTypeDef *flash_power_init, *flash_control_mode_init, *flash_wind_mode_init;
 /* USER CODE BEGIN PV */
 
 unsigned char receiveBuffer[5];
 unsigned char sendBuffer[9];
+uint32_t power_page = 511;
+uint32_t control_mode_page = 510;
+uint32_t wind_mode_page = 509;
+uint32_t* volatile p_error_page;
 
-POWER power = OFF;
-WIND_MODE wind_mode = LEVEL_1;
-CONTROL_MODE control_mode = AUTOMATIC;
+uint32_t* volatile p_power  = (uint32_t*) 0x080FF800;
+uint32_t* volatile p_control_mode  = (uint32_t*) 0x080FF000;
+uint32_t* volatile p_wind_mode = (uint32_t*) 0x080FE800;
+
+
+//POWER power = OFF;
+//WIND_MODE wind_mode = LEVEL_1;
+//CONTROL_MODE control_mode = AUTOMATIC;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
-extern void initialise_monitor_handles(void);
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
 
@@ -70,8 +80,6 @@ extern void initialise_monitor_handles(void);
   * @brief  The application entry point.
   * @retval int
   */
-
-
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -84,7 +92,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  Flash_init();
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -104,12 +112,13 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  /* USER CODE END WHILE */
-  
-  /* USER CODE BEGIN 3 */
+    /* USER CODE END WHILE */
 
-  test_message_handler(receiveBuffer, sendBuffer);
+    /* USER CODE BEGIN 3 */
 
+//  test_message_handler(receiveBuffer, sendBuffer);
+  	  test_get();
+  	  test_mutate();
 //  turn(0);
 //  handle_message(receiveBuffer, sendBuffer);
 //  ctrl_mode(0);
@@ -219,6 +228,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -226,7 +236,22 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void Flash_init(void){
+	flash_power_init->TypeErase =  0x00;
+	flash_power_init->Banks = FLASH_BANK_2;
+	flash_power_init->NbPages = 1;
+	flash_power_init->Page = power_page;
 
+	flash_control_mode_init->TypeErase =  0x00;
+	flash_control_mode_init->Banks = FLASH_BANK_2;
+	flash_control_mode_init->NbPages = 1;
+	flash_control_mode_init->Page = control_mode_page;
+
+	flash_wind_mode_init->TypeErase = 0x00;
+	flash_wind_mode_init->Banks = FLASH_BANK_2;
+	flash_wind_mode_init->NbPages = 1;
+	flash_wind_mode_init->Page = wind_mode_page;
+}
 
 
 /* USER CODE END 4 */
