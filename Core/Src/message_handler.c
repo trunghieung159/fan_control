@@ -138,7 +138,7 @@ void process_wind_mode_message(unsigned char* received_buf, unsigned char* sent_
 	 *
 	*/
 	if(!check_message_data_length(received_buf, 1)){
-		return;
+		goto terminate;
 	}
 
 	uint8_t* received_data = received_buf + 3;

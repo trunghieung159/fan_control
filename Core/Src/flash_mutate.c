@@ -9,7 +9,7 @@
 uint32_t power_page = 0;
 uint32_t control_mode_page = 1;
 uint32_t wind_mode_page = 2;
-uint32_t* volatile p_error_page;
+uint32_t p_error_page;
 
 uint32_t power_page_address = 0x08080000;
 uint32_t control_mode_page_address  = 0x08080800;
@@ -25,7 +25,7 @@ void mutate_power(POWER power){
 	uint32_t* p_power_page = (uint32_t*) power_page_address;
 	if(*p_power_page != power){
 		HAL_FLASH_Unlock();
-		HAL_FLASHEx_Erase(&flash_erase_power_init, p_error_page);
+		HAL_FLASHEx_Erase(&flash_erase_power_init, &p_error_page);
 		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, power_page_address, power);
 		HAL_FLASH_Lock();
 	}
@@ -42,7 +42,7 @@ void mutate_control_mode(CONTROL_MODE control_mode){
 	uint32_t* p_control_mode_page = (uint32_t*) control_mode_page_address;
 	if(*p_control_mode_page != control_mode){
 		HAL_FLASH_Unlock();
-		HAL_FLASHEx_Erase(&flash_erase_control_mode_init, p_error_page);
+		HAL_FLASHEx_Erase(&flash_erase_control_mode_init, &p_error_page);
 		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, control_mode_page_address, control_mode);
 		HAL_FLASH_Lock();
 	}
@@ -59,7 +59,7 @@ void mutate_wind_mode(WIND_MODE wind_mode){
 	uint32_t* p_wind_mode_page = (uint32_t*) wind_mode_page_address;
 	if(*p_wind_mode_page != wind_mode){
 		HAL_FLASH_Unlock();
-		HAL_FLASHEx_Erase(&flash_erase_wind_mode_init, p_error_page);
+		HAL_FLASHEx_Erase(&flash_erase_wind_mode_init, &p_error_page);
 		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, wind_mode_page_address, wind_mode);
 		HAL_FLASH_Lock();
 	}
