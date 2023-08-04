@@ -1,0 +1,6 @@
+message_handler.c:75:6:process_power_message	4
+message_handler.c:102:6:process_control_mode_message	4
+message_handler.c:133:6:process_wind_mode_message	4
+message_handler.c:162:9:process_states_request_message	2
+message_handler.c:11:9:handle_message	7
+message_handler.c:192:9:check_message_data_length	1

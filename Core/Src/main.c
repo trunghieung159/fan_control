@@ -44,19 +44,16 @@
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart1;
-FLASH_EraseInitTypeDef *flash_power_init, *flash_control_mode_init, *flash_wind_mode_init;
+
 /* USER CODE BEGIN PV */
+FLASH_EraseInitTypeDef flash_erase_power_init ;
+FLASH_EraseInitTypeDef flash_erase_control_mode_init;
+FLASH_EraseInitTypeDef flash_erase_wind_mode_init;
+
 
 unsigned char receiveBuffer[5];
 unsigned char sendBuffer[9];
-uint32_t power_page = 511;
-uint32_t control_mode_page = 510;
-uint32_t wind_mode_page = 509;
-uint32_t* volatile p_error_page;
 
-uint32_t* volatile p_power  = (uint32_t*) 0x080FF800;
-uint32_t* volatile p_control_mode  = (uint32_t*) 0x080FF000;
-uint32_t* volatile p_wind_mode = (uint32_t*) 0x080FE800;
 
 
 //POWER power = OFF;
@@ -68,6 +65,7 @@ uint32_t* volatile p_wind_mode = (uint32_t*) 0x080FE800;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
+
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
 
@@ -92,7 +90,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  Flash_init();
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -106,7 +104,6 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -236,22 +233,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void Flash_init(void){
-	flash_power_init->TypeErase =  0x00;
-	flash_power_init->Banks = FLASH_BANK_2;
-	flash_power_init->NbPages = 1;
-	flash_power_init->Page = power_page;
-
-	flash_control_mode_init->TypeErase =  0x00;
-	flash_control_mode_init->Banks = FLASH_BANK_2;
-	flash_control_mode_init->NbPages = 1;
-	flash_control_mode_init->Page = control_mode_page;
-
-	flash_wind_mode_init->TypeErase = 0x00;
-	flash_wind_mode_init->Banks = FLASH_BANK_2;
-	flash_wind_mode_init->NbPages = 1;
-	flash_wind_mode_init->Page = wind_mode_page;
-}
 
 
 /* USER CODE END 4 */
