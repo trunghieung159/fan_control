@@ -9,12 +9,18 @@
 #define SRC_FLASH_MUTATE_H_
 #include "message_handler.h"
 #include "stm32l4xx_hal.h"
+
+
+
+
+extern TIM_HandleTypeDef htim1;
 void mutate_power(POWER power);
 void mutate_control_mode(CONTROL_MODE control_mode);
 void mutate_wind_mode(WIND_MODE wind_mode);
-
+void wind_control(TIM_HandleTypeDef tim_handler, WIND_MODE wind_mode);
 uint8_t get_power();
 uint8_t get_control_mode();
 uint8_t get_wind_mode();
+
 
 #endif /* SRC_FLASH_MUTATE_H_ */

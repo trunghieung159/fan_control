@@ -1,3 +1,3 @@
 ../Core/Src/test_flash_mutate.c:11:6:print_state	0	static
 ../Core/Src/test_flash_mutate.c:14:6:test_get	8	static
-../Core/Src/test_flash_mutate.c:19:6:test_mutate	16	static
+../Core/Src/test_flash_mutate.c:28:6:test_mutate	16	static

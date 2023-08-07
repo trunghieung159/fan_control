@@ -28,6 +28,7 @@ typedef enum{
 extern POWER power;
 extern WIND_MODE wind_mode;
 extern CONTROL_MODE control_mode;
+extern int volatile temperature;
 
 uint8_t handle_message(unsigned char* received_buf, unsigned char* sent_buf);
 void process_power_message(unsigned char* received_buf, unsigned char* sent_buf);
