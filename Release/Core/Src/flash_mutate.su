@@ -1,7 +1,9 @@
-../Core/Src/flash_mutate.c:86:9:get_power	0	static
-../Core/Src/flash_mutate.c:91:9:get_control_mode	0	static
-../Core/Src/flash_mutate.c:96:9:get_wind_mode	0	static
-../Core/Src/flash_mutate.c:101:6:wind_control	0	static
-../Core/Src/flash_mutate.c:18:6:mutate_power	184	static
-../Core/Src/flash_mutate.c:48:6:mutate_control_mode	96	static
-../Core/Src/flash_mutate.c:69:6:mutate_wind_mode	96	static
+../Core/Src/flash_mutate.c:21:6:flash_erase_init	8	static
+../Core/Src/flash_mutate.c:103:9:get_power	0	static
+../Core/Src/flash_mutate.c:111:9:get_control_mode	0	static
+../Core/Src/flash_mutate.c:119:9:get_wind_mode	0	static
+../Core/Src/flash_mutate.c:127:6:wind_control	0	static
+../Core/Src/flash_mutate.c:40:6:mutate_power	168	static
+../Core/Src/flash_mutate.c:68:6:mutate_control_mode	80	static
+../Core/Src/flash_mutate.c:87:6:mutate_wind_mode	80	static
+../Core/Src/flash_mutate.c:146:6:check_and_fix_variables	16	static

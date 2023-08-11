@@ -119,10 +119,6 @@ void process_control_mode_message(unsigned char* received_buf, unsigned char* se
 	if(*received_data == AUTOMATIC || *received_data == MANUAL){
 		mutate_control_mode(*received_data);
 		*sent_data = 0x00;
-		if(get_control_mode() == AUTOMATIC){
-			//Read temperature
-			// Add logic
-		}
 	}
 	else{
 		*sent_data = 0xFF;
@@ -181,9 +177,11 @@ uint8_t process_states_request_message(unsigned char* received_buf, unsigned cha
 		*power_state = get_power();
 		*control_mode_state = get_control_mode();
 		*wind_mode_state = get_wind_mode();
-		// read temperature 
-		// modify this 
-		*temperature_state = 0x00;
+		int temp = (int) temperature;
+		if(temp < 0){
+			temp = 0;
+		}
+		*temperature_state = (uint8_t) temp;
 		sent_data_length = 5;
 	}
 	return sent_data_length;
