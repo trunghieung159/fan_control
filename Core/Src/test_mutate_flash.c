@@ -6,7 +6,7 @@
  */
 
 
-#include "test_flash_mutate.h"
+#include "test_mutate_flash.h"
 
 void print_state(uint8_t state){
 	printf("Actual:   %d\n", state);

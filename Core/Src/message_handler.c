@@ -6,7 +6,7 @@
  */
 
 #include "message_handler.h"
-#include "flash_mutate.h"
+#include "mutate_flash.h"
 
 uint8_t handle_message(unsigned char* received_buf, unsigned char* sent_buf){
 	/**

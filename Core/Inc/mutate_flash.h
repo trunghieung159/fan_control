@@ -20,5 +20,5 @@ uint8_t get_power();
 uint8_t get_control_mode();
 uint8_t get_wind_mode();
 void check_and_fix_variables();
-
+void restore_last_state();
 #endif /* SRC_FLASH_MUTATE_H_ */

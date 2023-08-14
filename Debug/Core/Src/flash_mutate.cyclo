@@ -1,9 +1,0 @@
-flash_mutate.c:21:6:flash_erase_init	1
-flash_mutate.c:42:6:mutate_power	4
-flash_mutate.c:67:6:mutate_control_mode	3
-flash_mutate.c:86:6:mutate_wind_mode	2
-flash_mutate.c:102:9:get_power	1
-flash_mutate.c:110:9:get_control_mode	1
-flash_mutate.c:118:9:get_wind_mode	1
-flash_mutate.c:126:6:wind_control	5
-flash_mutate.c:145:6:check_and_fix_variables	8

@@ -4,7 +4,7 @@
  *  Created on: Jul 26, 2023
  *      Author: nguyentrunghieu
  */
-#include"flash_mutate.h"
+#include <mutate_flash.h>
 uint32_t power_page = 0;
 uint32_t control_mode_page = 1;
 uint32_t wind_mode_page = 2;
@@ -159,6 +159,16 @@ void check_and_fix_variables(){
 		mutate_wind_mode(LEVEL_0);
 	}
 }
+
+void restore_last_state(){
+	uint32_t* p_power = (uint32_t*) power_page_address;
+	uint32_t* p_control_mode = (uint32_t*) control_mode_page_address;
+	uint32_t* p_wind_mode = (uint32_t*) wind_mode_page_address;
+	if(*p_power == ON && *p_control_mode == MANUAL){
+		wind_control(htim2, *p_wind_mode);
+	}
+}
+
 
 
 

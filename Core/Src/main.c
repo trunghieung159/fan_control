@@ -23,8 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include"message_handler.h"
 #include"test_message_handler.h"
-#include"flash_mutate.h"
-#include"test_flash_mutate.h"
+#include"test_mutate_flash.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,6 +56,7 @@ UART_HandleTypeDef huart1;
 
 extern uint32_t control_mode_page_address;
 extern uint32_t power_page_address;
+extern uint32_t wind_mode_page_address;
 unsigned char receiveBuffer[5];
 unsigned char sendBuffer[9];
 float volatile temperature = 0;
@@ -79,20 +79,25 @@ static void MX_NVIC_Init(void);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
-	uint32_t value = HAL_ADC_GetValue(&hadc1);
+	uint16_t value = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
 	//TO DO: temperature formula
 	uint32_t* p_control_mode = (uint32_t*) control_mode_page_address;
 	uint32_t* p_power = (uint32_t*) power_page_address;
+	float temp = ((float)value) / 4095 * 3300;
+	temperature = ((temp - 760.0) / 2.5) + 25;
+	if(temp < 0){
+		temperature = 0;
+	}
 	if(*p_control_mode == AUTOMATIC && *p_power == ON){
 		if(temperature < 15){
-			mutate_wind_mode(LEVEL_0);
+			mutate_wind_mode(LEVEL_2);
 		}
 		else if(temperature <= 30){
 			mutate_wind_mode(LEVEL_1);
 		}
 		else{
-			mutate_wind_mode(LEVEL_2);
+			mutate_wind_mode(LEVEL_0);
 		}
 	}
 }
@@ -145,6 +150,7 @@ int main(void)
   check_and_fix_variables();
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   HAL_TIM_Base_Start_IT(&htim8);
+  restore_last_state();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -152,15 +158,19 @@ int main(void)
   while(1){
 	  HAL_UART_Receive(&huart1, receiveBuffer, 2, HAL_MAX_DELAY);
 	  if(*(receiveBuffer+1) == 0x04){
-		  HAL_UART_Receive_IT(&huart1, receiveBuffer+2, 2);
+		  HAL_UART_Receive(&huart1, receiveBuffer+2, 2, HAL_MAX_DELAY);
 	  }
 	  else{
-		  HAL_UART_Receive_IT(&huart1, receiveBuffer+2, 3);
+		  HAL_UART_Receive(&huart1, receiveBuffer+2, 3, HAL_MAX_DELAY);
+	  }
+	  uint8_t status = handle_message(receiveBuffer, sendBuffer);
+	  if(status != 0){
+		  HAL_UART_Transmit(&huart1, sendBuffer, status, HAL_MAX_DELAY);
 	  }
   }
-  /* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
-  /* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
 
 //  test_message_handler(receiveBuffer, sendBuffer);
 // 	test_get();
@@ -412,7 +422,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 115200;
+  huart1.Init.BaudRate = 9600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
@@ -462,8 +472,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
-
 /* USER CODE END 4 */
 
 /**

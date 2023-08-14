@@ -1,5 +1,5 @@
-Core/Src/test_flash_mutate.o: ../Core/Src/test_flash_mutate.c \
- ../Core/Inc/test_flash_mutate.h ../Core/Inc/flash_mutate.h \
+Core/Src/test_mutate_flash.o: ../Core/Src/test_mutate_flash.c \
+ ../Core/Inc/test_mutate_flash.h ../Core/Inc/mutate_flash.h \
  ../Core/Inc/message_handler.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
@@ -32,8 +32,8 @@ Core/Src/test_flash_mutate.o: ../Core/Src/test_flash_mutate.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h
-../Core/Inc/test_flash_mutate.h:
-../Core/Inc/flash_mutate.h:
+../Core/Inc/test_mutate_flash.h:
+../Core/Inc/mutate_flash.h:
 ../Core/Inc/message_handler.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
